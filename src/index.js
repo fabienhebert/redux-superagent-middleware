@@ -63,7 +63,7 @@ const superagentMiddleware = store => next => action => {
         }
 
         if (config.hooks.onRequest) {
-            request = config.hooks.onRequest(request, store.getState(), action) || request
+            request = config.hooks.onRequest(store, action, request) || request
         }
 
         return request
@@ -102,8 +102,8 @@ const superagentMiddleware = store => next => action => {
         responses.map((response, index) => {
             const test = responseHandler(response)
 
-            if ((test.meta.requestFailed && config.hooks.failed && config.hooks.failed(requestActions[index], response, store) === false) ||
-                (test.error && config.hooks.error && config.hooks.error(requestActions[index], response, store) === false)) {
+            if ((test.meta.requestFailed && config.hooks.onFailure && config.hooks.onFailure(store, action, requestActions[index], response) === false) ||
+                (test.error && config.hooks.onError && config.hooks.onError(store, action, requestActions[index], response) === false)) {
                 interrupted = true
             }
             if (test.error === true) {

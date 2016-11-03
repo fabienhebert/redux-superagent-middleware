@@ -80,9 +80,9 @@ You can specify a function called before each request, it allows you to modify i
 
 This function have the following parameters :
 
-**store** : redux store
-**action** : custom dispatched flux action
-**request** : the pre-request built by middleware before xhr call
+- **store** : redux store
+- **action** : custom dispatched flux action
+- **request** : the pre-request built by middleware before xhr call
 
 Return the modified request to apply modifications
 
@@ -113,10 +113,10 @@ This hook is trigger before action.onError, action.onComplete, hooks.onError and
 
 This function have these following parameters :
 
-**store** : redux store
-**action** : custom dispatched flux action
-**request** : the request used for xhr call
-**response** : xhr call's response
+- **store** : redux store
+- **action** : custom dispatched flux action
+- **request** : the request used for xhr call
+- **response** : xhr call's response
 
 Example : 
 
@@ -138,10 +138,10 @@ This hook is trigger before action.onError, action.onComplete and you can interr
 
 This function have these following parameters :
 
-**store** : redux store
-**action** : custom dispatched flux action
-**request** : the request used for xhr call
-**response** : xhr call's response
+- **store** : redux store
+- **action** : custom dispatched flux action
+- **request** : the request used for xhr call
+- **response** : xhr call's response
 
 Example : 
 
@@ -165,10 +165,10 @@ const superagentMiddlewareInstance = superagentMiddleware({
 ### request [OBJECT]
 
 Request object supports these parameters :
-**base** (optional) : Specify the base of url of this request (example : http://anotherapi.com), it overload middleware config's base
-**url** (mandatory) : Specify the pathname (example : /v3/test ) or the complete url (http://test.api/v4/test)
-**method** (default value : GET) : http verb (GET/POST/PUT/DELETE/PATCH ...)
-**params** : query
+- **base** (optional) : Specify the base of url of this request (example : http://anotherapi.com), it overload middleware config's base
+- **url** (mandatory) : Specify the pathname (example : /v3/test ) or the complete url (http://test.api/v4/test)
+- **method** (default value : GET) : http verb (GET/POST/PUT/DELETE/PATCH ...)
+- **params** : query
 
 ``` js
 const customAction = {
@@ -202,11 +202,12 @@ const customAction = {
 ### Listeners [FUNCTIONs]
 
 You can add 4 listeners, these listeners is function which accept 4 parameters :
-payload [mixed] : response.body
-meta [object] : metadata of the response, including httpCode
-dispatch [function] : redux's dispatch function
-getState [function] : redux's getState function
+- payload [mixed] : response.body
+- meta [object] : metadata of the response, including httpCode
+- dispatch [function] : redux's dispatch function
+- getState [function] : redux's getState function
 
+Available listeners :
 - onStart : call before a request is executed (after onRequest hook) 
 - onSuccess : call when the request is done with a statusCode/httpCode < 300
 - onError : call when the request is done with a statusCode/httpCode >= 300

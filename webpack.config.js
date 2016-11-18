@@ -17,6 +17,9 @@ module.exports = {
         path : path.resolve("./src"),
         extensions : ["", ".js"]
     },
+    externals: [{
+        superagent: 'superagent'
+    }],
     module : {
         loaders : [
             {

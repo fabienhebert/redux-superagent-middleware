@@ -22,7 +22,10 @@
     "babel-loader": "^6.2.7",
     "babel-plugin-transform-object-rest-spread": "^6.16.0",
     "babel-preset-es2015": "^6.18.0",
-    "superagent": "2.x",
+    "superagent": "^2.3.0",
     "webpack": "^1.13.3"
+  },
+  "peerDependencies": {
+    "superagent": "^2.3.0"
   }
 }

@@ -110,7 +110,7 @@ const superagentMiddleware = store => next => action => {
                 hadError = true
             }
 
-            if (responses.length === 1){
+            if (!(action.request instanceof Array)){
                 finalPayload = test.payload,
                 finalMeta = test.meta
             } else {

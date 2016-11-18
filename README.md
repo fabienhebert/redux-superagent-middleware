@@ -1,5 +1,7 @@
 # redux-superagent-middleware
 
+Redux middleware handling custom action in order to do XHR request with superagent (Tested with superagent@2.3.0)
+
 ## Usage
 
 You must create an instance of the middleware. It allows you to specific a configuration. Then append the instantiated middleware to redux's applyMiddleware :
@@ -28,7 +30,7 @@ const store = createStore(
 )
 ```
 
-Then you can create and dispatch an appropriate action : 
+Then you can create and dispatch an appropriate action :
 
 ``` js
 dispatch({
@@ -50,7 +52,7 @@ Allow you to define the base of url (without pathname, parameters, ...). Example
 
 ### defaultHeaders [OBJECT]
 
-Request's headers used in each request. Example : 
+Request's headers used in each request. Example :
 
 ``` js
 const superagentMiddlewareInstance = superagentMiddleware({
@@ -63,7 +65,7 @@ const superagentMiddlewareInstance = superagentMiddleware({
 
 ### defaultParams [OBJECT]
 
-Request's query params used in each request. Example : 
+Request's query params used in each request. Example :
 
 ``` js
 const superagentMiddlewareInstance = superagentMiddleware({
@@ -86,7 +88,7 @@ This function have the following parameters :
 
 Return the modified request to apply modifications
 
-Example : 
+Example :
 
 ``` js
 const superagentMiddlewareInstance = superagentMiddleware({
@@ -98,7 +100,7 @@ const superagentMiddlewareInstance = superagentMiddleware({
             if (action.setToken === true){
                 request.params["token"] = token
             }
-            
+
             return request
         }
     }
@@ -118,7 +120,7 @@ This function have these following parameters :
 - **request** : the request used for xhr call
 - **response** : xhr call's response
 
-Example : 
+Example :
 
 ``` js
 const superagentMiddlewareInstance = superagentMiddleware({
@@ -143,7 +145,7 @@ This function have these following parameters :
 - **request** : the request used for xhr call
 - **response** : xhr call's response
 
-Example : 
+Example :
 
 ``` js
 const superagentMiddlewareInstance = superagentMiddleware({
@@ -151,7 +153,7 @@ const superagentMiddlewareInstance = superagentMiddleware({
         onFailure : (store, action, request, response) => {
             if (response.status === 401){
                 this.store.dispatch(logout())
-                
+
                 // Prevent onError / onComplete if they are specified in action
                 return false
             }
@@ -190,7 +192,7 @@ const customAction = {
     request : {
         base : "http://anotherapi.com",
         url : "v1/user",
-        method : "DELETE", 
+        method : "DELETE",
         params : {
             user_id: 1337,
         }
@@ -208,7 +210,7 @@ You can add 4 listeners, these listeners is function which accept 4 parameters :
 - getState [function] : redux's getState function
 
 Available listeners :
-- onStart : call before a request is executed (after onRequest hook) 
+- onStart : call before a request is executed (after onRequest hook)
 - onSuccess : call when the request is done with a statusCode/httpCode < 300
 - onError : call when the request is done with a statusCode/httpCode >= 300
 - onComplete : call when the request is done
@@ -220,7 +222,7 @@ const customAction = {
     request : {
         base : "http://anotherapi.com",
         url : "v1/user",
-        method : "DELETE", 
+        method : "DELETE",
         params : {
             user_id: 1337,
         }
@@ -236,7 +238,7 @@ const customAction = {
         dispatch({
             ...
         })
-        // And you can do one/severals dispatch, and then use return 
+        // And you can do one/severals dispatch, and then use return
         return {
             type : "REQUEST_SUCCESS",
             payload
@@ -261,7 +263,7 @@ If you interrupt the process in a config.hook like onFailure by returning false,
 
 In order to recognize the request's response in the success/error payload you can give a name for the request (otherwise it is request_${index} )
 
-Usage : 
+Usage :
 ``` js
 const customAction = {
     request : [ // You specify an array for request paramater

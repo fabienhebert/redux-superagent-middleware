@@ -76,6 +76,7 @@ const superagentMiddleware = store => next => action => {
         promiseList.push(new Promise(resolve => {
             const superagentRequest = superagent(request.method, request.base + request.url)
             request.params && superagentRequest.query(request.params)
+            request.headers && superagentRequest.set(request.headers)
             request.body && superagentRequest.send(request.body)
             superagentRequest.end((err, response) => {
                 resolve(response)

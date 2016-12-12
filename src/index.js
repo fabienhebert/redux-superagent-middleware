@@ -54,7 +54,7 @@ const superagentMiddleware = store => next => action => {
     const requestActions = action.request instanceof Array ? action.request : [action.request]
     const requests = requestActions.map(requestAction => {
         let request = {
-            base : requestAction.base || config.base,
+            base : requestAction.base !== undefined ? requestAction.base : config.base,
             url : requestAction.url,
             method : requestAction.method || "GET",
             headers : { ...config.defaultHeaders, ...(requestAction.headers || {}) },
